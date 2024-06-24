@@ -14,7 +14,7 @@ export default async function Blog({ params }: { params: { name: string } }) {
     if (!session) return
     return (
         <section>
-            <h1 className="mb-4">Welcome to {params.name}</h1>
+            <h1 className="my-4 text-2xl text-center uppercase font-bold">Welcome to {params.name}</h1>
             <BlogProvider>
                 <AddPostForm author={session.user!.name!} token={session.access_token}/>
                 <DisplayPosts token={session?.access_token!}/>

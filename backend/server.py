@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Response, Request
+from fastapi import FastAPI, Depends, Response, Request, HTTPException
 from fastapi.responses import RedirectResponse, JSONResponse
 from fastapi_keycloak import FastAPIKeycloak, OIDCUser
 from fastapi.encoders import jsonable_encoder
@@ -165,6 +165,21 @@ def create_post(name: str, body: PostBody):
     # existing_blog['_id'] = str(existing_blog['_id'])
     blogs.replace_one({'name': name}, existing_blog)
     return existing_blog
+
+@app.delete('/api/delete/{name}')
+def delete_blog(name: str, req: Request):
+    print(req.state.roles)
+    if not 'admin' in req.state.roles:
+        return HTTPException(403, 'You are not admin')
+    existing_blog = blogs.find_one({'name': name})
+    if not existing_blog:
+        return JSONResponse({"error": "Blog not found"}, 404)
+    res = blogs.delete_one({'name': name})
+    if res.deleted_count > 0:
+        return JSONResponse({'status': 'Blog deleted'})
+    else:
+        return JSONResponse({"error": "Blog not deleted"}, 404)
+    
 
 
 

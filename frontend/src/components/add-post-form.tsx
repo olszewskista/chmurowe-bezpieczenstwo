@@ -4,7 +4,13 @@ import { useBlog } from '@/context/blog-context';
 import { useParams } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 
-export default function AddPostForm({ token, author }: { token: string, author: string }) {
+export default function AddPostForm({
+    token,
+    author,
+}: {
+    token: string;
+    author: string;
+}) {
     const { blog, setBlog } = useBlog();
     console.log(blog);
     const params = useParams();
@@ -39,32 +45,43 @@ export default function AddPostForm({ token, author }: { token: string, author: 
     }
     return (
         <>
-            {blog && blog.author === author && <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="title">Title</label>
-                    <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        value={formData.title}
-                        onChange={(e) => handleChange('title', e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="content">Content</label>
-                    <textarea
-                        name="content"
-                        id="content"
-                        cols={30}
-                        rows={3}
-                        value={formData.content}
-                        onChange={(e) =>
-                            handleChange('content', e.target.value)
-                        }
-                    ></textarea>
-                </div>
-                <button>Submit</button>
-            </form>}
+            {blog && !(blog.author === author) && (
+                <div className='text-center mb-2'>You are not the author, you cannot create a post</div>
+            )}
+            {blog && blog.author === author && (
+                <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col gap-2 items-center justify-center"
+                >
+                    <h3 className="text-l">Create a new post</h3>
+                    <div className="flex flex-col items-center justify-center">
+                        <label htmlFor="title">Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            id="title"
+                            value={formData.title}
+                            onChange={(e) =>
+                                handleChange('title', e.target.value)
+                            }
+                        />
+                    </div>
+                    <div className="flex flex-col items-center justify-center">
+                        <label htmlFor="content">Content</label>
+                        <textarea
+                            name="content"
+                            id="content"
+                            cols={30}
+                            rows={3}
+                            value={formData.content}
+                            onChange={(e) =>
+                                handleChange('content', e.target.value)
+                            }
+                        ></textarea>
+                    </div>
+                    <button className="text-blue-500">Submit</button>
+                </form>
+            )}
         </>
     );
 }

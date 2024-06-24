@@ -26,13 +26,14 @@ export default function CreateForm({token}: {token: string}) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name" className='mr-2'>Name</label>
             <input 
                 type="text" 
                 id="name" 
                 name="name" 
                 value={name} 
                 onChange={(e) => setName(e.target.value)} 
+                className='mr-2'
             />
             <button type="submit">Submit</button>
         </form>

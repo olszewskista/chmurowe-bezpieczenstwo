@@ -17,7 +17,7 @@ export default function RandomBlog({token}: {token: string}) {
         router.push(`/blogs/${json}`)
     }
     return <>
-        <h3>Random blog</h3>
-        <button onClick={handleClick}>Click</button>
+        <h3 className="text-xl uppercase font-bold">Random blog</h3>
+        <button className='text-blue-500 p-2' onClick={handleClick}>Click</button>
     </>;
 }

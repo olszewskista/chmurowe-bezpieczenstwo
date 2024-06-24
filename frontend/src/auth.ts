@@ -27,7 +27,6 @@ async function refreshAccessToken(token: JWT) {
         refresh_token: refreshToken.refresh_token,
     };
 }
-console.log([process.env.AUTH_URL, process.env.AUTH_KEYCLOAK_ID]);
 export const { handlers, auth, signIn, signOut } = NextAuth({
     debug: true,
     trustHost: true,
@@ -59,7 +58,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 token.id_token = account.id_token;
                 token.expires_at = account.expires_at;
                 token.refresh_token = account.refresh_token;
-                console.log(account)
+                console.log(token.decrypted)
                 return token;
             } else if (
                 typeof token.expires_at === 'number' &&
@@ -86,7 +85,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             // session.roles = "dfd"
             // session['roles'] = token.decoded.realm_access.roles;
             // const roles = token.decrypted.realm_access.roles;
-            (session as any).roles = 'sdfsdf';
+            (session as any).roles = (token as any).decrypted.realm_access.roles;
             (session as any).access_token = token.access_token;
             console.log(session);
             return session;
@@ -97,5 +96,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 declare module 'next-auth' {
     interface Session {
         access_token: string;
+        roles: [string]
     }
 }

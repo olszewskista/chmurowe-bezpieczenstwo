@@ -8,7 +8,7 @@ export function SignIn() {
                 await signIn('keycloak');
             }}
         >
-            <button type="submit">Sign in with Keycloak</button>
+            <button type="submit" className='text-green-500'>Sign in with Keycloak</button>
         </form>
     );
 }

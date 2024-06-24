@@ -20,19 +20,19 @@ export default function DisplayPosts({token}: {token: string}) {
         })()
     }, [params, token, setBlog]);
     return (
-        <>
+        <ul className='flex flex-col gap-4'>
             {blog && blog.posts.map((item, i) => {
                 return (
-                    <div key={i} className="mb-2">
-                        <h3>{item.title}</h3>
-                        <div>{item.content}</div>
-                        <div className="flex">
+                    <li key={i} className="mb-2 p-4 bg-neutral-700 rounded-md mx-24">
+                        <h3 className='text-center text-xl uppercase font-bold'>{item.title}</h3>
+                        <div className='text-wra break-all'>{item.content}</div>
+                        <div className="flex justify-between">
                             <div>{blog.author}</div>
                             <div>{item.date}</div>
                         </div>
-                    </div>
+                    </li>
                 );
             })}
-        </>
+        </ul>
     );
 }
