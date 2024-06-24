@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+      - name: keycloak
+        image: bitnami/keycloak:latest
+        env:
+        - name: DB_VENDOR
+          value: "postgres"
+        - name: DB_ADDR
+          value: "postgresql"
+        - name: DB_DATABASE
+          value: "keycloak"
+        - name: DB_USER
+          value: "keycloak"
+        - name: DB_PASSWORD
+          value: "password"
+        - name: KEYCLOAK_EXTRA_ARGS
+          value: "--import-realm"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: keycloak-realm
+          mountPath: /opt/bitnami/keycloak/data/import
+      volumes:
+      - name: keycloak-realm
+        configMap:
+          name: keycloak-realm-config
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: keycloak
+spec:
+  selector:
+    app: keycloak
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
