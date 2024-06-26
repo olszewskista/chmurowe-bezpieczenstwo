@@ -24,13 +24,17 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="flex gap-4 justify-center text-blue-500">
-          <Link href={'/'}>Home</Link>
-          <Link href='/create'>Create</Link>
-          {session?.roles.find(item => item === 'admin') && <Link href={'/admin'}>Admin</Link>}
-          <DisplaySession/>
-          {!session && <SignIn/>}
-          {session && <SignOut/>}
+        <nav className="flex gap-32 justify-center text-blue-500">
+          <div className="flex justify-center items-center gap-4">
+            <Link href={'/'}>Home</Link>
+            <Link href='/create'>Create</Link>
+            {session?.roles.find(item => item === 'admin') && <Link href={'/admin'}>Admin</Link>}
+          </div>
+          <div className="flex justify-center items-center gap-4">
+            <DisplaySession/>
+            {!session && <SignIn/>}
+            {session && <SignOut/>}
+          </div>
         </nav>
         <main>
           {children}

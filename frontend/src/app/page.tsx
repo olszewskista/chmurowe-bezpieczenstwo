@@ -1,5 +1,4 @@
 import { auth } from '@/auth';
-import FetchHelper from '@/components/fetch-helper';
 import RandomBlog from '@/components/random-blog';
 import SearchBlogs from '@/components/search-blogs';
 
@@ -16,7 +15,6 @@ export default async function Home() {
             <div className='text-center'>
                 <SearchBlogs token={session.access_token} admin={false} />
             </div>
-            {/* <FetchHelper token={session.access_token} /> */}
         </section>
     );
 }

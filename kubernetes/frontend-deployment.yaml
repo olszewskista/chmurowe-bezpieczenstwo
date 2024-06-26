@@ -17,6 +17,13 @@ spec:
         image: olszewskista/front_bez:latest
         ports:
           - containerPort: 3000
+        resources:
+          limits:
+            cpu: "0.4"
+            memory: "512Mi"
+          requests:
+            cpu: "0.3"
+            memory: "256Mi"
 
 ---
 apiVersion: v1

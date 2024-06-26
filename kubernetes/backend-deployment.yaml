@@ -14,39 +14,42 @@ spec:
     spec:
       containers:
         - name: backend
-          image: olszewskista/back_bez:1.0
+          image: olszewskista/back_bez:latest
           ports:
             - containerPort: 8000
           resources:
             limits:
-              cpu: "1"
+              cpu: "0.3"
               memory: "512Mi"
             requests:
-              cpu: "0.5"
+              cpu: "0.2"
               memory: "256Mi"
+          env:
+            - name: PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secrets
+                  key: PUBLIC_KEY
 ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: backend
-# spec:
-#   selector:
-#     app: backend
-#   ports:
-#     - protocol: TCP
-#       port: 8000
-#       targetPort: 8000
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-secrets
+type: Opaque
+data:
+  PUBLIC_KEY: TUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFsQXhwVzErVjBodEV6d3dQVnRmckEzRG9rVWRQUU9tTllKOXp2bUhzUk80U0VaSVRmaldKdi9USEhNb0ZMY2lPOHBBdnpabnJ6b0dwNG9DdURINkVXTWtlVHZ0MnZZYStTNDEzbFVSN09HTURLdmdEbWlUY3Nrc3ZCWWdGRG1Pd2dQQ0NzTEk3RDFETm42cFhOOHowNjFpZUNINDBUYUxoKytJVTZ5VC9oM1ZaLzVOWmo5bHVVTnAwMDlQNVZMUWNlSmkyVTRVWmNhNmQyMVd5RlBlTnZHbUdFcjh1QTRvKzU5UGFVVE5ZcDlOM00wc2JER1F2TjRQYlV4TXh3R1hobFZ0QTM4eWVuQXdyS1diZ0FoLzFCQ3loNzJsb283eWNHbnE0OElLSGhzb0pCcVdvTmp4cHFqRUlRYW01OGRPbHArMGN6V1ZZN2kyRlRpUGthQUh5VlFJREFRQUI=
+
+---
+
 apiVersion: v1
 kind: Service
 metadata:
   name: backend
-  namespace: my-blog
 spec:
   selector:
     app: backend
-  type: NodePort
   ports:
     - protocol: TCP
       port: 8000
       targetPort: 8000
-      nodePort: 32001

@@ -11,9 +11,12 @@ export default function RandomBlog({token}: {token: string}) {
                 'Authorization': 'Bearer ' + token
             }
         })
-        console.log('dfdfd')
-        if (!res.ok) return
+        if (!res.ok) {
+            alert(await res.text())
+            return
+        }
         const json = await res.json()
+        console.log(json)
         router.push(`/blogs/${json}`)
     }
     return <>

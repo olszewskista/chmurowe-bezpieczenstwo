@@ -1,9 +1,8 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: mongo
 spec:
-  serviceName: mongo
   replicas: 1
   selector:
     matchLabels:
@@ -21,6 +20,13 @@ spec:
         volumeMounts:
         - name: mongo-data
           mountPath: /data/db
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "0.5"
+            memory: "512Mi"
       volumes:
       - name: mongo-data
         persistentVolumeClaim:

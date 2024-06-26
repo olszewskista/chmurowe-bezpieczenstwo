@@ -1,11 +1,10 @@
 'use client';
-import { useParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
 
 export default function CreateForm({token}: {token: string}) {
     const [name, setName] = useState('');
     const router = useRouter()
-    console.log(name)
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -16,17 +15,15 @@ export default function CreateForm({token}: {token: string}) {
             },
             method: 'POST'
         })
-        if (!res.ok) return
+        if (!res.ok) {
+            alert(await res.text())
+            return
+        }
         router.push('/blogs/' + name)
-        // const json = await res.json()
-
-        // console.log(json)
-
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="name" className='mr-2'>Name</label>
+        <form onSubmit={handleSubmit} className='flex flex-col items-center gap-2 mt-4'>
             <input 
                 type="text" 
                 id="name" 
@@ -35,7 +32,7 @@ export default function CreateForm({token}: {token: string}) {
                 onChange={(e) => setName(e.target.value)} 
                 className='mr-2'
             />
-            <button type="submit">Submit</button>
+            <button type="submit" className='text-blue-500'>Submit</button>
         </form>
     );
 }

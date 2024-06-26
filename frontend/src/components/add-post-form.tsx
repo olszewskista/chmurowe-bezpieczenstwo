@@ -12,9 +12,7 @@ export default function AddPostForm({
     author: string;
 }) {
     const { blog, setBlog } = useBlog();
-    console.log(blog);
     const params = useParams();
-    console.log(params);
     const [formData, setFormData] = useState({ title: '', content: '' });
     function handleChange(key: string, value: string) {
         setFormData((prev) => ({
@@ -38,7 +36,10 @@ export default function AddPostForm({
                 }),
             }
         );
-        if (!res.ok) return;
+        if (!res.ok) {
+            alert(await res.text())
+            return
+        };
         const json = await res.json();
         console.log(json);
         setBlog(json);
@@ -79,7 +80,7 @@ export default function AddPostForm({
                             }
                         ></textarea>
                     </div>
-                    <button className="text-blue-500">Submit</button>
+                    <button className="text-blue-500 mb-2">Submit</button>
                 </form>
             )}
         </>

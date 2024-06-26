@@ -14,7 +14,10 @@ export default function DisplayPosts({token}: {token: string}) {
                     'Authorization': "Bearer " + token
                 }
             })
-            if (!res.ok) return
+            if (!res.ok) {
+                alert(await res.text())
+                return
+            }
             const json = await res.json()
             setBlog(json)
         })()
