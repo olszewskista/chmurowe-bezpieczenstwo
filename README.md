@@ -1,5 +1,7 @@
 # Blogium
 
+![Blogium](https://i.imgur.com/cZZVrpq.png)
+
 ### Opis
 
 Blogium to wyjątkowe miejsce, gdzie użytkownicy mogą dzielić się swoimi przeżyciami i inspiracjami. Platforma dostępna jest wyłącznie dla zalogowanych użytkowników, dlatego warto jak najszybciej założyć konto. Po zalogowaniu, otwierają się przed nami pełne możliwości aplikacji. Możemy zaryzykować i odwiedzić losowy blog, odkrywając nowe historie, lub skorzystać z wyszukiwarki, aby znaleźć konkretnego autora i cieszyć się lekturą jego przygód.
