@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: keycloak-realm-config
-data:
-  realm.json: |
-    # Your realm.json content here

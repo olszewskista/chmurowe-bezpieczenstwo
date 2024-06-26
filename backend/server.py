@@ -1,6 +1,5 @@
-from fastapi import FastAPI, Depends, Response, Request, HTTPException
-from fastapi.responses import RedirectResponse, JSONResponse
-from fastapi_keycloak import FastAPIKeycloak, OIDCUser
+from fastapi import FastAPI, Response, Request, HTTPException
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from pymongo import MongoClient
 from pydantic import BaseModel
@@ -8,10 +7,8 @@ from typing import List
 import jwt
 import re
 from datetime import datetime
-# from dotenv import load_dotenv
 import os
 
-# load_dotenv()
 
 
 client = MongoClient('mongo', 27017)

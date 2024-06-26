@@ -1,7 +1,6 @@
-#!/bin/zsh
+#!/bin/bash
 
 kubectl create namespace my-blog
-
 
 kubectl create configmap keycloak-realm-config --from-file=realm.json=./keycloak/realm.json -n my-blog
 

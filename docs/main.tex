@@ -1,0 +1,266 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont} 
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[top=1in, bottom=1.5in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\graphicspath{{Imagens/}}
+\usepackage{xcolor,colortbl}
+\usepackage{float}
+\usepackage{hyperref}
+
+\newcommand \comment[1]{\textbf{\textcolor{red}{#1}}}
+
+%\usepackage{float}
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{indentfirst}
+\usepackage{placeins}
+\usepackage{scalefnt}
+\usepackage{xcolor,listings}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{framed}
+\usepackage[T1]{fontenc}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{HTML}{C42043}
+\definecolor{backcolour}{HTML}{F2F2F2}
+\definecolor{bookColor}{cmyk}{0,0,0,0.90}  
+\color{bookColor}
+
+\lstset{upquote=true}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codepurple},
+	numberstyle=\numberstyle,
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=10pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+}
+\lstset{style=mystyle}
+
+\newcommand\numberstyle[1]{%
+	\footnotesize
+	\color{codegray}%
+	\ttfamily
+	\ifnum#1<10 0\fi#1 |%
+}
+
+\definecolor{shadecolor}{HTML}{F2F2F2}
+
+\newenvironment{sqltable}%
+{\snugshade\verbatim}%
+{\endverbatim\endsnugshade}
+
+% Margins
+\addtolength{\footskip}{0cm}
+\addtolength{\textwidth}{1.4cm}
+\addtolength{\oddsidemargin}{-.7cm}
+
+\addtolength{\textheight}{1.6cm}
+%\addtolength{\topmargin}{-2cm}
+
+% paragrafo
+\addtolength{\parskip}{.2cm}
+
+\newcommand{\MYhref}[3][blue]{\href{#2}{\color{#1}{#3}}}%
+
+% Set up the header and footer
+\pagestyle{fancy}
+\rhead{\hmwkAuthorName} % Top left header
+\lhead{\hmwkClass: \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{Jan Kowalski} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{} % Bottom right footer
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+    
+\newcommand{\hmwkTitle}{Blogium} % Tytuł projektu
+\newcommand{\hmwkDueDate}{\today} % Data 
+\newcommand{\hmwkClass}{Technologie chmurowe} % Nazwa przedmiotu
+\newcommand{\hmwkAuthorName}{Stanisław Olszewski} % Imię i nazwisko
+
+% trabalho 
+\begin{document}
+% capa
+\begin{titlepage}
+    \vfill
+	\begin{center}
+	\hspace*{-1cm}
+	\vspace*{0.5cm}
+    \includegraphics[scale=0.55]{loga.png}\\
+	\textbf{Uniwersytet Gdański \\ [0.05cm]Wydział Matematyki, Fizyki i Informatyki \\ [0.05cm] Instytut Informatyki}
+
+	\vspace{0.6cm}
+	\vspace{4cm}
+	{\huge \textbf{\hmwkTitle}}\vspace{8mm}
+	
+	{\large \textbf{\hmwkAuthorName}}\\[3cm]
+	
+		\hspace{.45\textwidth} %posiciona a minipage
+	   \begin{minipage}{.5\textwidth}
+	   Projekt z przedmiotu technologie chmurowe na kierunku informatyka profil praktyczny na Uniwersytecie Gdańskim.\\[0.1cm]
+	  \end{minipage}
+	  \vfill
+	%\vspace{2cm}
+	
+	\textbf{Gdańsk}
+	
+	\textbf{\hmwkDueDate}
+	\end{center}
+	
+\end{titlepage}
+
+\newpage
+\setcounter{secnumdepth}{5}
+\tableofcontents
+\newpage
+
+\section{Opis projektu}
+\label{sec:Project}
+
+Blogium to wyjątkowe miejsce, gdzie użytkownicy mogą dzielić się swoimi przeżyciami i inspiracjami. Platforma dostępna jest wyłącznie dla zalogowanych użytkowników, dlatego warto jak najszybciej założyć konto. Po zalogowaniu, otwierają się przed nami pełne możliwości aplikacji. Możemy zaryzykować i odwiedzić losowy blog, odkrywając nowe historie, lub skorzystać z wyszukiwarki, aby znaleźć konkretnego autora i cieszyć się lekturą jego przygód.
+
+Kiedy przeczytamy już wszystko, co nas interesuje, możemy stworzyć własnego bloga. Na nim to my będziemy jedynymi autorami wpisów, co daje pełną kontrolę nad treściami. Jedynie administrator ma prawo usunąć naszego bloga, co zapewnia porządek i bezpieczeństwo na platformie. Blogium to miejsce, gdzie każdy może znaleźć coś dla siebie i dzielić się swoimi opowieściami z innymi.
+
+\subsection{Opis architektury - 8 pkt}
+\label{sec:introduction}
+
+Aplikacja Blogium składa się z pięciu kluczowych komponentów: interfejsu użytkownika (NextJS), serwera aplikacji (Python FastAPI), bazy danych MongoDB, bazy danych PostgreSQL oraz systemu zarządzania tożsamością Keycloak.
+
+Blogium działa w klastrze Kubernetes, który jest open-source'owym rozwiązaniem do zarządzania kontenerami. Kubernetes zapewnia wysoką skalowalność, niezawodność i wydajność aplikacji.
+
+Użytkownicy mają dostęp do frontendu za pośrednictwem przeglądarki internetowej pod adresem \MYhref[blue]{http://localhost:3000}{localhost:3000} dzięki port-forwardingowi. Serwer aplikacji komunikuje się z bazą danych MongoDB, gdzie przechowywane są blogi użytkowników. MongoDB posiada swój własny wolumen, który zapewnia przechowywanie danych nawet w przypadku awarii. Zarządzanie dostępem do wszystkich komponentów aplikacji odbywa się za pomocą Keycloak, który swoje dane przechowuje w bazie PostgreSQL.
+
+Dzięki tej architekturze, Blogium jest zarówno wydajne, jak i niezawodne, a także łatwe do skalowania w miarę wzrostu liczby użytkowników i zawartości.
+
+\subsection{Opis infrastruktury - 6 pkt}
+\label{sec:Users}
+
+Serwis Blogium został zaprojektowany do działania w klastrze Kubernetes w wersji 1.29.2, uruchomionym za pomocą narzędzia Docker Desktop. To narzędzie pozwala na uruchamianie kontenerów i klastrów Kubernetes bezpośrednio na lokalnym komputerze, co stanowi idealne rozwiązanie do testowania i tworzenia aplikacji bez potrzeby konfigurowania pełnowymiarowego klastra.
+
+Domyślna specyfikacja klastra to 4 GB pamięci RAM, 2 wirtualne CPU oraz 10 GB przestrzeni dyskowej, co zapewnia wystarczające zasoby do efektywnego testowania i rozwijania serwisu Blogium w środowisku lokalnym.
+
+
+\subsection{Opis komponentów aplikacji - 8 pkt}
+\label{sec:FunctionalConditions}
+
+Powinna zawierać informacje na temat komponentów aplikacji, takich jak serwisy, aplikacje i bazy danych. W szczególności należy zwrócić uwagę na sposoby ich wdrażania, konfiguracji i zarządzania.
+
+Serwis Blogium składa się z następujących komponentów:
+
+\begin{itemize}
+  \item \textbf{Frontend:} Interfejs internetowy dla użytkownika, stworzony przy użyciu frameworka NextJS, który rozszerza bibliotekę React. NextJS wprowadza wiele zaawansowanych funkcjonalności, takich jak akcje serwerowe i AuthJS.
+  
+  \item \textbf{Backend:} Serwer aplikacji zbudowany z użyciem FastAPI w Pythonie. Komunikuje się z bazą danych MongoDB za pomocą biblioteki PyMongo oraz dekoduje tokeny JWT, zapewniając bezpieczeństwo i autoryzację użytkowników.
+  
+  \item \textbf{MongoDB:} Nierelacyjna baza danych zaprojektowana do przechowywania danych w formie dokumentów. Przechowuje blogi użytkowników na dedykowanym wolumenie, co zapewnia dodatkową niezawodność i ochronę danych.
+  
+  \item \textbf{Keycloak:} System zarządzania użytkownikami, skonfigurowany do autentykacji przy użyciu protokołu OpenID Connect. Generuje tokeny użytkowników, które określają poziom dostępu do aplikacji.
+  
+  \item \textbf{PostgreSQL:} Baza danych używana do przechowywania danych Keycloak'a. Podobnie jak MongoDB, posiada dedykowany wolumen, zapewniając bezpieczeństwo i trwałość danych.
+\end{itemize}
+
+Dzięki tej architekturze, Blogium oferuje kompleksowe rozwiązanie do zarządzania blogami, łącząc nowoczesne technologie frontendowe i backendowe z niezawodnym przechowywaniem danych i zaawansowanym systemem zarządzania użytkownikami.
+\subsection{Konfiguracja i zarządzanie - 4 pkt}
+\label{sec:NonFunctionalConditions}
+
+Powinna zawierać informacje na temat konfiguracji i zarządzania aplikacją na poziomie klastra Kubernetes.
+
+Konfiguracja i zarządzanie klastrem Kubernetes dla serwisu Blogium odbywa się przy użyciu następujących zasobów:
+
+\begin{itemize}
+  \item \textbf{Deployments:} Każdy komponent aplikacji, z wyjątkiem baz danych, jest uruchamiany jako oddzielny Deployment. Deployments umożliwiają łatwe skalowanie oraz aktualizację parametrów kontenerów, co pozwala na efektywne zarządzanie aplikacją.
+  
+  \item \textbf{Services:} Każdy Deployment ma przypisany własny Service, który umożliwia komunikację między kontenerami oraz równoważenie obciążenia, zapewniając stabilne działanie aplikacji.
+  
+  \item \textbf{StatefulSet:} Bazy danych są uruchamiane jako StatefulSet. Każda baza danych posiada unikalną tożsamość, która jest zachowywana podczas restartów i migracji na inne węzły, co zapewnia trwałość i niezawodność przechowywanych danych.
+  
+  \item \textbf{ConfigMaps i Secrets:} ConfigMaps służą do przechowywania jawnych danych konfiguracyjnych, takich jak konfiguracja Keycloak. Secrets natomiast przechowują poufne informacje zaszyfrowane w formacie BASE64. Obie te struktury umożliwiają szybkie i bezpieczne zarządzanie parametrami aplikacji bez konieczności jej ponownego kompilowania.
+  
+  \item \textbf{Persistent Volume Claims (PVC):} PVC to wolumeny, które zapewniają trwałe przechowywanie danych nawet w przypadku usunięcia lub awarii kontenera. Dzięki nim dane są chronione i mogą być odzyskane po awarii.
+\end{itemize}
+
+Dzięki tym zasobom i mechanizmom, klaster Kubernetes zapewnia efektywne i bezpieczne zarządzanie serwisem Blogium, umożliwiając jego skalowanie, aktualizację oraz trwałe przechowywanie danych.
+
+
+\subsection{Zarządzanie błędami - 2 pkt}
+\label{sec:ERD} 
+
+Błędy w serwisie Blogium są kontrolowane w następujący sposób:
+
+\begin{itemize}
+  \item \textbf{Na poziomie aplikacji:} 
+  \begin{itemize}
+    \item \textbf{Frontend:} Fragmenty kodu potencjalnie mogące generować błędy są opatrzone blokami "try-catch". Zapytania do serwera, które kończą się niepowodzeniem, wyświetlają użytkownikowi odpowiedni komunikat, zapewniając przejrzystość i zrozumienie sytuacji.
+    \item \textbf{Backend:} Analogicznie, po stronie backendu używane są bloki "try-except", które w przypadku błędu wysyłają odpowiedni komunikat i status do klienta, informując, co poszło nie tak.
+  \end{itemize}
+  
+  \item \textbf{Na poziomie klastra:} 
+  Kubernetes zapewnia niemal natychmiastową replikację poda w przypadku awarii, co minimalizuje przestoje w działaniu serwisu. Jeśli pod ma więcej niż jedną replikę, ruch jest przekierowywany do pozostałych replik, podczas gdy uszkodzony pod się restartuje. Dzięki temu użytkownicy serwisu nie odczuwają praktycznie żadnych przerw w działaniu.
+\end{itemize}
+
+
+\subsection{Skalowalność - 4 pkt}
+\label{sec:ExamplesSection}
+
+Skalowalność jest fundamentem architektury aplikacji opartej na Kubernetes. Wyróżniamy dwa główne rodzaje skalowalności: horyzontalną i wertykalną.
+
+\begin{itemize}
+    \item \textbf{Skalowalność Horyzontalna:} Polega na dodawaniu lub usuwaniu instancji (podów) aplikacji, aby dostosować się do zmieniającego się obciążenia. W Kubernetes realizuje się to głównie za pomocą ReplicaSet (ręczne ustawienie liczby replik Deploymentu) lub Horizontal Pod Autoscaler (automatyczne dostosowywanie liczby podów na podstawie metryk, takich jak CPU, pamięć, czy niestandardowe metryki użytkownika). Skalowanie horyzontalne umożliwia łatwe dostosowanie liczby instancji aplikacji do bieżącego zapotrzebowania, zapewniając elastyczność i wysoką dostępność.
+    
+    \item \textbf{Skalowalność Wertykalna:} Polega na dostosowywaniu zasobów przydzielonych pojedynczym instancjom (podom). W Kubernetes realizuje się to za pomocą Vertical Pod Autoscaler (VPA), który automatycznie dostosowuje limity i żądania zasobów (CPU i pamięci) dla podów. VPA monitoruje zasoby używane przez pody i dynamicznie je dostosowuje, aby zoptymalizować wydajność aplikacji. Skalowanie wertykalne pozwala na efektywne wykorzystanie dostępnych zasobów, minimalizując marnotrawstwo i zapewniając stabilność aplikacji.
+\end{itemize}
+
+Dzięki zastosowaniu tych dwóch rodzajów skalowalności, Kubernetes umożliwia elastyczne i efektywne zarządzanie zasobami, dostosowując się do zmieniających się warunków i wymagań aplikacji.
+
+
+
+\subsection{Wymagania dotyczące zasobów - 2 pkt}
+\label{sec:ExampleTables}
+
+\begin{itemize}
+    \item \textbf{Frontend:} 512MB pamięci RAM, 0.4 rdzenia CPU
+    \item \textbf{Backend:} 512MB pamięci RAM, 0.3 rdzenia CPU
+    \item \textbf{Keycloak:} 1.5GB pamięci RAM, 1 rdzenia CPU
+    \item \textbf{MongoDB:} 1GB pamięci na dysku
+    \item \textbf{PostgreSQL:} 1GB pamięci na dysku
+\end{itemize}
+
+Zasoby podane dla każdego komponentu powinny zapewnić wystarczającą wydajność i czas odpowiedzi.
+
+
+\subsection{Architektura sieciowa - 4 pkt}
+\label{sec:ExampleResults}
+
+Architektura sieciowa aplikacji opiera się na wykorzystaniu service'ów, które umożliwiają komunikację między poszczególnymi komponentami. Użytkownicy uzyskują dostęp do aplikacji poprzez port-forwarding, co przekierowuje porty 3000, 8000 i 8080 z serwera klastra na odpowiednie porty lokalne. Frontend oraz backend komunikują się ze sobą za pomocą protokołu HTTP, natomiast autentykacja użytkowników jest obsługiwana poprzez protokół OpenID Connect we współpracy z serwerem Keycloak.
+
+\noindent
+
+
+\bibliographystyle{amsplain}
+\bibliography{references.bib}
+\nocite{*}
+
+\end{document}

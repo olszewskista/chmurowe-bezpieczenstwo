@@ -5,3 +5,5 @@ kubectl delete -f ./kubernetes/frontend-deployment.yaml -n my-blog
 kubectl delete -f ./kubernetes/keycloak-deployment.yaml -n my-blog
 kubectl delete -f ./kubernetes/postgres-deployment.yaml -n my-blog
 kubectl delete -f ./kubernetes/mongo-deployment.yaml -n my-blog
+kubectl delete configmaps -n my-blog keycloak-realm-config
+kubectl delete namespaces my-blog
